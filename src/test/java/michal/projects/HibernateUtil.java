@@ -19,7 +19,7 @@ public class HibernateUtil {
     static {
         try {
             // Tworzymy SessionFactory na podstawie konfiguracji
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml")
+            sessionFactory = new Configuration().configure("hibernate-test.cfg.xml")
                     .addAnnotatedClass(User.class)
                     .addAnnotatedClass(Book.class)
                     .addAnnotatedClass(Loan.class)

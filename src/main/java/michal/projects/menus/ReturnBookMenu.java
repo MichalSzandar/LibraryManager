@@ -47,6 +47,7 @@ public class ReturnBookMenu implements Menu {
                 System.out.println("Book successfully returned.");
             } else {
                 System.out.println("Unable to return book.");
+                transaction.rollback();
             }
             
         } catch (Exception e) {

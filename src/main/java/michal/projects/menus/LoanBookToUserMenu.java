@@ -50,6 +50,7 @@ public class LoanBookToUserMenu implements Menu{
                 System.out.println("Book successfully loaned to user.");
             } else {
                 System.out.println("Book not found.");
+                transaction.rollback();
             }
         } catch (Exception e) {
             transaction.rollback();

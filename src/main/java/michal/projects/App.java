@@ -14,6 +14,7 @@ import michal.projects.data.Loan;
 import michal.projects.data.Role;
 import michal.projects.data.User;
 import michal.projects.data_access.UserDAO;
+import michal.projects.menus.AddBookMenu;
 import michal.projects.menus.AddReaderMenu;
 import michal.projects.menus.FilterBooksByCategory;
 import michal.projects.menus.LoanBookToUserMenu;
@@ -45,6 +46,7 @@ public class App
         menuMap.put(3, new ReturnBookMenu());
         menuMap.put(4, new AddReaderMenu());
         menuMap.put(5, new RemoveReaderMenu());
+        menuMap.put(6, new AddBookMenu());
 
 
         try (Scanner scanner = new Scanner(System.in)) {
@@ -67,6 +69,8 @@ public class App
                     System.out.println("Invalid choice. Please try again.");
                 }
             }
+        } catch(NumberFormatException e) {
+            e.printStackTrace();
         } finally {
             sessionFactory.close();
         }
@@ -106,10 +110,15 @@ public class App
             System.out.println("10. Log out");
             System.out.print("Choose an option: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
-            menuMap.get(choice).showMenu(scanner, session, user);
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+                menuMap.get(choice).showMenu(scanner, session, user);
+            } catch (NumberFormatException e) {
+                System.out.println("wrong input");
+                continue;
+            }
+            
         }
     }
 }
